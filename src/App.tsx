@@ -18,7 +18,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/Laya-sFinalEcom/">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/cart" element={<CartPage />} />
