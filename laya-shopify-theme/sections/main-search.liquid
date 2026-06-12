@@ -1,0 +1,80 @@
+{% paginate search.results by section.settings.results_per_page %}
+  <section class="py-12 md:py-20" data-theme="home">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="mb-10 text-center">
+        <p class="eyebrow mb-3">Search</p>
+        <h1 class="font-serif text-3xl md:text-5xl">{% if search.performed %}Results for “{{ search.terms | escape }}”{% else %}Search the shop{% endif %}</h1>
+        <p class="mt-4 text-muted-foreground">Find products, collections, pages, and articles from Shopify.</p>
+      </div>
+
+      <form action="{{ routes.search_url }}" method="get" role="search" class="mx-auto mb-10 max-w-3xl">
+        <input type="hidden" name="options[prefix]" value="last">
+        <input type="hidden" name="type" value="product,collection,page,article">
+        <div class="flex flex-col gap-3 md:flex-row">
+          <input class="laya-search-input flex-1" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search for products, collections, or pages">
+          <button class="laya-primary-button text-[12px] font-semibold uppercase tracking-[0.14em]" type="submit">Search</button>
+        </div>
+      </form>
+
+      {% if search.performed %}
+        {% if search.results_count > 0 %}
+          <div class="laya-search-grid">
+            {% for item in search.results %}
+              {% case item.object_type %}
+                {% when 'product' %}
+                  {% render 'product-card', card_product: item, badge_text: '' %}
+                {% when 'collection' %}
+                  {% render 'collection-card', card_collection: item, manual_title: item.title, manual_url: item.url, manual_badge: '', manual_background: '#E8C8B8', manual_gradient: '' %}
+                {% else %}
+                  <article class="laya-generic-card">
+                    <p class="eyebrow mb-3">{{ item.object_type }}</p>
+                    <h2 class="font-serif text-2xl leading-tight"><a href="{{ item.url }}">{{ item.title }}</a></h2>
+                    {% if item.content != blank %}
+                      <p class="mt-4 text-sm leading-relaxed text-muted-foreground">{{ item.content | strip_html | truncate: 150 }}</p>
+                    {% endif %}
+                    <a href="{{ item.url }}" class="mt-6 inline-flex border-b border-foreground pb-1 text-[12px] uppercase tracking-[0.14em] hover:text-accent hover:border-accent transition-colors">View</a>
+                  </article>
+              {% endcase %}
+            {% endfor %}
+          </div>
+
+          {% if paginate.pages > 1 %}
+            <nav class="laya-pagination" aria-label="Pagination">
+              {% if paginate.previous %}<a href="{{ paginate.previous.url }}">Previous</a>{% endif %}
+              {% for part in paginate.parts %}
+                {% if part.is_link %}
+                  <a href="{{ part.url }}">{{ part.title }}</a>
+                {% else %}
+                  <span class="{% if part.title == paginate.current_page %}is-current{% endif %}">{{ part.title }}</span>
+                {% endif %}
+              {% endfor %}
+              {% if paginate.next %}<a href="{{ paginate.next.url }}">Next</a>{% endif %}
+            </nav>
+          {% endif %}
+        {% else %}
+          <div class="laya-search-empty py-16">
+            <h2 class="font-serif text-3xl">Nothing matched that search</h2>
+            <p class="mt-4 text-muted-foreground">Try a product name, collection name, or a simpler keyword.</p>
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </section>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Main search",
+  "settings": [
+    {
+      "type": "range",
+      "id": "results_per_page",
+      "label": "Results per page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

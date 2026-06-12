@@ -1,0 +1,103 @@
+<footer data-theme="home" class="bg-[hsl(60_4%_17%)] text-[hsl(33_27%_94%)]">
+  <div class="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 sm:grid-cols-2 md:grid-cols-4 md:gap-10 md:py-16 lg:px-8">
+    <div class="sm:col-span-2 md:col-span-1">
+      <p class="font-serif text-2xl">{{ shop.name | default: "Laya's Little Shop" }}</p>
+      <p class="mt-4 max-w-sm text-[13px] leading-relaxed opacity-70 md:max-w-[240px]">{{ settings.store_tagline }}</p>
+      <div class="mt-6 flex gap-4">
+        {% if settings.social_instagram_link != blank %}
+          <a href="{{ settings.social_instagram_link }}" aria-label="Instagram" class="hover:text-accent transition-colors">{% render 'icon', name: 'instagram', class: 'h-5 w-5' %}</a>
+        {% endif %}
+        {% if settings.social_facebook_link != blank %}
+          <a href="{{ settings.social_facebook_link }}" aria-label="Facebook" class="hover:text-accent transition-colors">{% render 'icon', name: 'facebook', class: 'h-5 w-5' %}</a>
+        {% endif %}
+        {% if settings.social_pinterest_link != blank %}
+          <a href="{{ settings.social_pinterest_link }}" aria-label="Pinterest" class="hover:text-accent transition-colors">{% render 'icon', name: 'pinterest', class: 'h-5 w-5' %}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div>
+      <h2 class="mb-4 text-[11px] uppercase tracking-[0.18em] opacity-70">{{ section.settings.quick_links_heading }}</h2>
+      <ul class="space-y-2.5 text-[13px]">
+        {% assign quick_menu = section.settings.quick_links_menu.links %}
+        {% if quick_menu != blank and quick_menu.size > 0 %}
+          {% for link in quick_menu %}
+            <li><a href="{{ link.url }}" class="laya-footer-link">{{ link.title }}</a></li>
+          {% endfor %}
+        {% else %}
+          <li><a href="{{ routes.root_url }}" class="laya-footer-link">Home</a></li>
+          <li><a href="{{ routes.collections_url }}" class="laya-footer-link">Collections</a></li>
+          <li><a href="{{ routes.search_url }}" class="laya-footer-link">Search</a></li>
+          <li><a href="{{ routes.cart_url }}" class="laya-footer-link">Cart</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="mb-4 text-[11px] uppercase tracking-[0.18em] opacity-70">{{ section.settings.shop_links_heading }}</h2>
+      <ul class="space-y-2.5 text-[13px]">
+        {% assign shop_menu = section.settings.shop_links_menu.links %}
+        {% if shop_menu != blank and shop_menu.size > 0 %}
+          {% for link in shop_menu %}
+            <li><a href="{{ link.url }}" class="laya-footer-link">{{ link.title }}</a></li>
+          {% endfor %}
+        {% else %}
+          <li><a href="{{ routes.collections_url }}" class="laya-footer-link">All collections</a></li>
+          <li><a href="{{ routes.all_products_collection_url }}" class="laya-footer-link">All products</a></li>
+          <li><a href="{{ routes.search_url }}" class="laya-footer-link">Browse catalogue</a></li>
+          <li><a href="{{ routes.cart_url }}" class="laya-footer-link">Cart</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="mb-4 text-[11px] uppercase tracking-[0.18em] opacity-70">{{ section.settings.contact_heading }}</h2>
+      <ul class="space-y-2.5 text-[13px] opacity-90">
+        <li>{{ settings.footer_email }}</li>
+        <li>{{ settings.footer_hours }}</li>
+        <li>{{ settings.footer_made_in }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <p class="container mx-auto px-4 py-5 text-[10px] uppercase tracking-[0.12em] opacity-60 sm:text-[11px] sm:tracking-[0.16em] lg:px-8">&copy; {{ 'now' | date: '%Y' }} {{ shop.name | default: "Laya's Little Shop" }}. All rights reserved.</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "quick_links_heading",
+      "label": "Quick links heading",
+      "default": "Quick Links"
+    },
+    {
+      "type": "link_list",
+      "id": "quick_links_menu",
+      "label": "Quick links menu",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "shop_links_heading",
+      "label": "Shop heading",
+      "default": "Shop"
+    },
+    {
+      "type": "link_list",
+      "id": "shop_links_menu",
+      "label": "Shop menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact heading",
+      "default": "Contact"
+    }
+  ]
+}
+{% endschema %}

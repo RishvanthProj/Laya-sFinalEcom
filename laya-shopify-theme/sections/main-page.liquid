@@ -1,0 +1,16 @@
+<section class="py-12 md:py-20" data-theme="home">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <p class="eyebrow mb-3">Page</p>
+      <h1 class="font-serif text-3xl md:text-5xl">{{ page.title }}</h1>
+      <div class="laya-richtext rte mt-8 text-[15px] leading-relaxed text-foreground/80">{{ page.content }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main page",
+  "settings": []
+}
+{% endschema %}

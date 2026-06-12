@@ -1,0 +1,75 @@
+{% liquid
+  assign theme_variant = section.settings.theme_style
+  if theme_variant == 'auto'
+    assign theme_variant = 'home'
+    if collection.handle contains 'clearance'
+      assign theme_variant = 'clearance'
+    elsif collection.handle contains 'gold-plated' or collection.handle contains 'jewellery' or collection.handle contains 'jewelry'
+      assign theme_variant = 'luxury'
+    elsif collection.handle contains 'stationery' or collection.handle contains 'school'
+      assign theme_variant = 'stationery'
+    endif
+  endif
+
+  assign accent_class = 'text-accent'
+  assign fallback_copy = 'Thoughtfully curated pieces made to feel special in the everyday.'
+  assign fallback_asset = 'hero-resin-art.png'
+
+  case theme_variant
+    when 'clearance'
+      assign accent_class = 'text-[#FFD600]'
+      assign fallback_copy = 'Festival-ready picks, stationery bundles, and last-piece deals at happy prices.'
+      assign fallback_asset = 'hero-clearance-sale.png'
+    when 'stationery'
+      assign accent_class = 'text-[#0077CC]'
+      assign fallback_copy = 'School and desk essentials with joyful color, neat utility, and handcrafted charm.'
+      assign fallback_asset = 'hero-school-supplies.png'
+    when 'luxury'
+      assign accent_class = 'text-[#C9A84C]'
+      assign fallback_copy = 'Gold-toned jewellery and elevated accents for everyday occasion dressing.'
+      assign fallback_asset = 'hero-gold-plated-jewellery.webp'
+  endcase
+%}
+
+<section class="relative overflow-hidden" data-theme="{{ theme_variant }}">
+  {% if collection.featured_image != blank %}
+    {{ collection.featured_image | image_url: width: 2400 | image_tag: widths: '640, 960, 1200, 1600, 2200', class: 'h-[280px] w-full object-cover md:h-[430px]', loading: 'eager', alt: collection.title }}
+  {% else %}
+    <img src="{{ fallback_asset | asset_url }}" alt="{{ collection.title | escape }}" class="h-[280px] w-full object-cover md:h-[430px]" loading="eager" width="1713" height="624">
+  {% endif %}
+  <div class="absolute inset-0 bg-black/20" aria-hidden="true"></div>
+  <div class="absolute inset-x-0 bottom-0">
+    <div class="container mx-auto px-4 py-8 md:py-12 lg:px-8">
+      <p class="{{ accent_class }} text-[11px] font-bold uppercase tracking-[0.18em]">{{ section.settings.eyebrow }}</p>
+      <h1 class="mt-3 max-w-3xl font-serif text-3xl leading-tight text-white md:text-6xl">{{ collection.title }}</h1>
+      <p class="mt-4 max-w-xl text-sm leading-relaxed text-white/85 md:text-base">{% if collection.description != blank %}{{ collection.description | strip_html }}{% else %}{{ fallback_copy }}{% endif %}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Shop The Edit"
+    },
+    {
+      "type": "select",
+      "id": "theme_style",
+      "label": "Collection theme style",
+      "default": "auto",
+      "options": [
+        { "value": "auto", "label": "Auto-detect" },
+        { "value": "home", "label": "Editorial" },
+        { "value": "stationery", "label": "Stationery" },
+        { "value": "luxury", "label": "Luxury" },
+        { "value": "clearance", "label": "Clearance" }
+      ]
+    }
+  ]
+}
+{% endschema %}

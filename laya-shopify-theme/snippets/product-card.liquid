@@ -1,0 +1,67 @@
+{% liquid
+  assign product_object = card_product
+  assign title_text = fallback_title
+  assign price_text = fallback_price
+  assign compare_price_text = blank
+  assign product_url = fallback_url | default: '#'
+  assign asset_name = fallback_asset
+  assign image_object = fallback_image
+  assign badge_label = badge_text | default: fallback_badge
+  assign button_text = button_label | default: 'Add to Cart'
+  assign is_available = false
+
+  if product_object != blank
+    assign title_text = product_object.title
+    assign product_url = product_object.url
+    assign is_available = product_object.available
+    assign badge_label = badge_text | default: fallback_badge
+    if product_object.selected_or_first_available_variant != blank
+      assign price_text = product_object.selected_or_first_available_variant.price | money
+      if product_object.selected_or_first_available_variant.compare_at_price > product_object.selected_or_first_available_variant.price
+        assign compare_price_text = product_object.selected_or_first_available_variant.compare_at_price | money
+      endif
+    else
+      assign price_text = product_object.price | money
+    endif
+  endif
+%}
+
+<article class="group w-[72vw] max-w-[280px] sm:w-64 lg:w-auto lg:max-w-none {% if card_class != blank %}{{ card_class }}{% endif %}">
+  <div class="relative overflow-hidden aspect-square bg-secondary/40">
+    {% if product_object != blank and product_object.featured_media != blank %}
+      {{ product_object.featured_media | image_url: width: 900 | image_tag: widths: '320, 480, 720, 900', class: 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-105', loading: 'lazy', alt: title_text }}
+    {% elsif image_object != blank %}
+      {{ image_object | image_url: width: 900 | image_tag: widths: '320, 480, 720, 900', class: 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-105', loading: 'lazy', alt: title_text }}
+    {% elsif asset_name != blank %}
+      <img src="{{ asset_name | asset_url }}" alt="{{ title_text | escape }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" width="900" height="900">
+    {% else %}
+      <div class="w-full h-full bg-secondary"></div>
+    {% endif %}
+
+    {% if badge_label != blank %}
+      <span class="absolute top-3 left-3 flex items-center gap-1 bg-[#C1602B] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] leading-none text-white">{{ badge_label }}</span>
+    {% endif %}
+
+    {% if product_object != blank %}
+      {% form 'product', product_object, class: 'absolute inset-x-3 bottom-3' %}
+        <input type="hidden" name="id" value="{{ product_object.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" name="add" aria-label="Add {{ title_text }} to cart" class="absolute inset-x-0 bottom-0 bg-background/95 py-2.5 text-[11px] uppercase tracking-[0.14em] text-foreground transition-all sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 {% unless is_available %}opacity-60 cursor-not-allowed{% endunless %}" {% unless is_available %}disabled{% endunless %}>
+          {% if is_available %}{{ button_text }}{% else %}Sold Out{% endif %}
+        </button>
+      {% endform %}
+    {% else %}
+      <a href="{{ product_url }}" class="absolute inset-x-3 bottom-3 bg-background/95 py-2.5 text-center text-[11px] uppercase tracking-[0.14em] text-foreground transition-all sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">{{ button_text }}</a>
+    {% endif %}
+  </div>
+
+  <div class="mt-3">
+    <h3 class="text-[14px] text-foreground"><a href="{{ product_url }}">{{ title_text }}</a></h3>
+    <div class="mt-1 flex items-center gap-2 text-[13px] text-muted-foreground">
+      <span>{{ price_text }}</span>
+      {% if compare_price_text != blank %}
+        <span class="line-through opacity-70">{{ compare_price_text }}</span>
+      {% endif %}
+    </div>
+  </div>
+</article>

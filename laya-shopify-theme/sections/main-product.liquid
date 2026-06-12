@@ -1,0 +1,119 @@
+{% liquid
+  assign theme_variant = section.settings.theme_style
+  if theme_variant == 'auto'
+    assign theme_variant = 'home'
+    for product_collection in product.collections
+      if product_collection.handle contains 'clearance'
+        assign theme_variant = 'clearance'
+        break
+      elsif product_collection.handle contains 'gold-plated' or product_collection.handle contains 'jewellery' or product_collection.handle contains 'jewelry'
+        assign theme_variant = 'luxury'
+        break
+      elsif product_collection.handle contains 'stationery' or product_collection.handle contains 'school'
+        assign theme_variant = 'stationery'
+        break
+      endif
+    endfor
+  endif
+
+  assign current_variant = product.selected_or_first_available_variant
+%}
+
+<section class="laya-product-page py-10 md:py-16" data-theme="{{ theme_variant }}">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="laya-product-grid">
+      <div class="laya-product-media">
+        <div class="laya-product-media-grid">
+          {% if product.media.size > 0 %}
+            {% for media in product.media %}
+              <div class="laya-product-media-item">
+                {% if media.media_type == 'image' %}
+                  {{ media | image_url: width: 1600 | image_tag: widths: '480, 720, 960, 1280, 1600', class: 'aspect-[4/5] w-full object-cover', loading: 'lazy', alt: product.title }}
+                {% elsif media.preview_image != blank %}
+                  {{ media.preview_image | image_url: width: 1600 | image_tag: widths: '480, 720, 960, 1280, 1600', class: 'aspect-[4/5] w-full object-cover', loading: 'lazy', alt: product.title }}
+                {% endif %}
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="laya-product-media-item">
+              <div class="aspect-[4/5] bg-secondary"></div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="laya-product-content">
+        <p class="eyebrow mb-3">{{ product.vendor | default: shop.name }}</p>
+        <h1 class="font-serif text-3xl leading-tight md:text-5xl">{{ product.title }}</h1>
+        <div class="mt-5">
+          {% render 'price', price_product: product, price_class: 'text-2xl font-semibold text-accent', wrapper_class: 'flex items-center gap-3 text-lg' %}
+        </div>
+
+        {% if product.description != blank %}
+          <div class="laya-product-description laya-richtext mt-6 rte">{{ product.description }}</div>
+        {% else %}
+          <p class="laya-product-description mt-6">Handcrafted details, thoughtful materials, and small-batch charm — edited for everyday delight.</p>
+        {% endif %}
+
+        {% form 'product', product, class: 'laya-product-form' %}
+          <div class="laya-product-options">
+            {% unless product.has_only_default_variant %}
+              {% for option in product.options_with_values %}
+                <div>
+                  <label class="laya-field-label" for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                  <select class="laya-select" id="Option-{{ section.id }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]">
+                    {% for value in option.values %}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% endfor %}
+            {% endunless %}
+
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+
+            <div>
+              <label class="laya-field-label" for="Quantity-{{ section.id }}">Quantity</label>
+              <div class="laya-quantity" data-quantity-wrapper>
+                <button type="button" aria-label="Decrease quantity" data-quantity-action="decrease">{% render 'icon', name: 'minus', class: 'h-4 w-4 mx-auto' %}</button>
+                <input id="Quantity-{{ section.id }}" type="number" name="quantity" min="1" value="1">
+                <button type="button" aria-label="Increase quantity" data-quantity-action="increase">{% render 'icon', name: 'plus', class: 'h-4 w-4 mx-auto' %}</button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" name="add" class="laya-add-to-cart text-[12px] font-semibold uppercase tracking-[0.16em]" {% unless product.available %}disabled{% endunless %}>
+            {% if product.available %}Add to Cart{% else %}Sold Out{% endif %}
+          </button>
+        {% endform %}
+
+        <div class="laya-meta-list">
+          <p><strong>Collections:</strong> {% for product_collection in product.collections %}<a href="{{ product_collection.url }}">{{ product_collection.title }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+          <p><strong>Availability:</strong> {% if product.available %}Ready to order{% else %}Currently unavailable{% endif %}</p>
+          <p><strong>Checkout:</strong> Shopify handles secure checkout and order management once the product is added to cart.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [
+    {
+      "type": "select",
+      "id": "theme_style",
+      "label": "Theme style",
+      "default": "auto",
+      "options": [
+        { "value": "auto", "label": "Auto-detect" },
+        { "value": "home", "label": "Editorial" },
+        { "value": "stationery", "label": "Stationery" },
+        { "value": "luxury", "label": "Luxury" },
+        { "value": "clearance", "label": "Clearance" }
+      ]
+    }
+  ]
+}
+{% endschema %}

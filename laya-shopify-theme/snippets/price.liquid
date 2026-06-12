@@ -1,0 +1,9 @@
+{% liquid
+  assign target = price_product.selected_or_first_available_variant | default: price_product
+%}
+<div class="{% if wrapper_class != blank %}{{ wrapper_class }}{% else %}flex items-center gap-2{% endif %}">
+  <span class="{% if price_class != blank %}{{ price_class }}{% else %}font-bold text-accent{% endif %}">{{ target.price | money }}</span>
+  {% if target.compare_at_price > target.price %}
+    <span class="text-sm text-muted-foreground line-through">{{ target.compare_at_price | money }}</span>
+  {% endif %}
+</div>

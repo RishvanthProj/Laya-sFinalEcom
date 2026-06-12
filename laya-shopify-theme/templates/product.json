@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "theme_style": "auto"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

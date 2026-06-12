@@ -1,0 +1,19 @@
+{
+  "name": "Footer group",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "quick_links_heading": "Quick Links",
+        "quick_links_menu": "footer",
+        "shop_links_heading": "Shop",
+        "shop_links_menu": "main-menu",
+        "contact_heading": "Contact"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

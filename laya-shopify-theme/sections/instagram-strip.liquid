@@ -1,0 +1,42 @@
+<section class="bg-accent/10 py-10 md:py-16" data-theme="home">
+  <div class="container mx-auto px-4 text-center">
+    <p class="eyebrow mb-3">{{ section.settings.eyebrow }}</p>
+    <p class="font-serif text-2xl leading-snug md:text-3xl">{{ section.settings.text }} <a href="{{ section.settings.link }}" class="text-accent underline-offset-4 hover:underline">{{ section.settings.handle }}</a></p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Follow Along"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "New arrivals every week — follow us"
+    },
+    {
+      "type": "text",
+      "id": "handle",
+      "label": "Handle",
+      "default": "@layaslittleshop"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram strip"
+    }
+  ]
+}
+{% endschema %}

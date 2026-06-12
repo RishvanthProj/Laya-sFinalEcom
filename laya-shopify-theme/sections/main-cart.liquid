@@ -1,0 +1,111 @@
+<section class="py-10 md:py-12" data-theme="home">
+  <div class="container mx-auto px-4">
+    <h1 class="mb-6 font-serif text-3xl md:mb-8 md:text-4xl">Your Cart</h1>
+
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
+          <div class="space-y-6 lg:col-span-8">
+            {% for item in cart.items %}
+              <div class="grid grid-cols-[80px_1fr] gap-4 border-b border-border pb-6 sm:flex sm:items-center sm:gap-6">
+                <div class="h-20 w-20 overflow-hidden rounded-lg bg-secondary sm:h-24 sm:w-24">
+                  {% if item.image != blank %}
+                    {{ item.image | image_url: width: 400 | image_tag: widths: '160, 240, 320, 400', class: 'h-full w-full object-cover', loading: 'lazy', alt: item.title }}
+                  {% else %}
+                    <div class="h-full w-full bg-secondary"></div>
+                  {% endif %}
+                </div>
+                <div class="flex-1">
+                  <h2 class="text-base font-medium sm:text-lg"><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
+                  <p class="text-sm text-muted-foreground">{% if item.variant.title != 'Default Title' %}{{ item.variant.title }}{% else %}Default variant{% endif %}</p>
+                  <div class="mt-4 flex items-center justify-between">
+                    <div class="laya-quantity" data-quantity-wrapper>
+                      <button type="button" aria-label="Decrease quantity" data-quantity-action="decrease">{% render 'icon', name: 'minus', class: 'h-4 w-4 mx-auto' %}</button>
+                      <input type="number" name="updates[{{ item.key }}]" min="1" value="{{ item.quantity }}">
+                      <button type="button" aria-label="Increase quantity" data-quantity-action="increase">{% render 'icon', name: 'plus', class: 'h-4 w-4 mx-auto' %}</button>
+                    </div>
+                    <a href="{{ item.url_to_remove }}" class="text-sm text-muted-foreground transition-colors hover:text-destructive">Remove</a>
+                  </div>
+                </div>
+                <div class="col-span-2 text-left sm:text-right">
+                  <p class="text-lg font-bold">{{ item.final_line_price | money }}</p>
+                  <p class="text-sm text-muted-foreground">{{ item.final_price | money }} each</p>
+                </div>
+              </div>
+            {% endfor %}
+
+            {% assign recommendation_collection = collections[section.settings.recommendation_collection] %}
+            {% if recommendation_collection != blank and recommendation_collection.products_count > 0 %}
+              <div class="mt-16">
+                <h2 class="mb-6 font-serif text-2xl">{{ section.settings.recommendation_title }}</h2>
+                <div class="scroll-row">
+                  {% for product in recommendation_collection.products limit: 4 %}
+                    {% render 'product-card', card_product: product, card_class: 'max-w-48 w-[46vw] flex-shrink-0', badge_text: '' %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="space-y-6 lg:col-span-4 lg:sticky lg:top-24 h-fit">
+            <div class="rounded-lg bg-secondary/20 p-5 md:p-8">
+              <h2 class="mb-6 font-serif text-2xl">Order Summary</h2>
+              <div class="space-y-4 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-muted-foreground">Subtotal</span>
+                  <span class="font-medium">{{ cart.total_price | money }}</span>
+                </div>
+                {% if section.settings.show_note %}
+                  <div class="pt-4 border-t border-border">
+                    <label class="mb-2 block text-muted-foreground" for="CartNote">Order note</label>
+                    <textarea id="CartNote" class="laya-note min-h-[120px]" name="note" placeholder="Add gift notes, delivery requests, or anything else.">{{ cart.note }}</textarea>
+                  </div>
+                {% endif %}
+                <div class="flex justify-between border-t border-border pt-4 text-lg font-bold">
+                  <span>Total</span>
+                  <span>{{ cart.total_price | money }}</span>
+                </div>
+              </div>
+
+              <div class="laya-cart-actions">
+                <button class="laya-secondary-button flex-1 text-[12px] font-semibold uppercase tracking-[0.14em]" type="submit" name="update">Update cart</button>
+                <button class="laya-primary-button flex-1 text-[12px] font-semibold uppercase tracking-[0.14em]" type="submit" name="checkout">Checkout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    {% else %}
+      <div class="laya-empty-state flex flex-col items-center justify-center space-y-6 py-24">
+        {% render 'icon', name: 'bag', class: 'h-24 w-24 text-muted-foreground opacity-20' %}
+        <h2 class="font-serif text-2xl">Your cart is empty</h2>
+        <a href="{{ routes.all_products_collection_url }}" class="laya-primary-button px-8 text-[12px] font-semibold uppercase tracking-[0.14em]">Start Shopping</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_note",
+      "label": "Show order note",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "recommendation_collection",
+      "label": "Recommendation collection"
+    },
+    {
+      "type": "text",
+      "id": "recommendation_title",
+      "label": "Recommendation title",
+      "default": "You might also like"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,84 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Laya Boutique",
+    "theme_version": "1.0.0",
+    "theme_author": "OpenAI Codex",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes/architecture",
+    "theme_support_url": "https://shopify.dev/docs/storefronts/themes/architecture"
+  },
+  {
+    "name": "Branding",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 80,
+        "max": 320,
+        "step": 10,
+        "unit": "px",
+        "default": 180
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      },
+      {
+        "type": "textarea",
+        "id": "store_tagline",
+        "label": "Store tagline",
+        "default": "Handcrafted artisan stationery, daily essentials & jewellery — made with love, in India."
+      }
+    ]
+  },
+  {
+    "name": "Footer content",
+    "settings": [
+      {
+        "type": "text",
+        "id": "footer_email",
+        "label": "Email",
+        "default": "hello@layaslittleshop.in"
+      },
+      {
+        "type": "text",
+        "id": "footer_hours",
+        "label": "Hours",
+        "default": "Mon – Sat, 10am – 6pm IST"
+      },
+      {
+        "type": "text",
+        "id": "footer_made_in",
+        "label": "Made in text",
+        "default": "Made with love in India"
+      }
+    ]
+  },
+  {
+    "name": "Social links",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook_link",
+        "label": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest_link",
+        "label": "Pinterest"
+      }
+    ]
+  }
+]

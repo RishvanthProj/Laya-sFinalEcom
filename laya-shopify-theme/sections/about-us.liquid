@@ -1,0 +1,80 @@
+<section class="py-12 md:py-24" style="background-color: #F2EBE0;" data-theme="home">
+  <div class="container mx-auto grid items-center gap-8 px-4 md:grid-cols-2 md:gap-20 lg:px-8">
+    <div>
+      <p class="eyebrow mb-4">{{ section.settings.eyebrow }}</p>
+      <h2 class="font-serif text-3xl leading-tight md:text-5xl">{{ section.settings.title }}</h2>
+      <div class="laya-richtext mt-5 max-w-lg space-y-4 text-[14px] leading-relaxed text-foreground/75 md:mt-7 md:text-[15px]">
+        {{ section.settings.body }}
+      </div>
+      {% if section.settings.link_label != blank and section.settings.link != blank %}
+        <a href="{{ section.settings.link }}" class="mt-7 inline-block border-b border-foreground pb-1 text-[12px] uppercase tracking-[0.14em] transition-colors hover:border-accent hover:text-accent md:tracking-[0.18em]">{{ section.settings.link_label }}</a>
+      {% endif %}
+    </div>
+
+    <div class="relative">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '640, 960, 1280, 1600', class: 'w-full aspect-[4/3] object-cover rounded-sm', loading: 'lazy', alt: section.settings.title }}
+      {% else %}
+        <img src="{{ 'story.jpg' | asset_url }}" alt="{{ section.settings.title | escape }}" loading="lazy" width="1200" height="900" class="w-full aspect-[4/3] object-cover rounded-sm">
+      {% endif %}
+      {% if section.settings.badge_text != blank %}
+        <div class="absolute -bottom-5 -left-5 hidden h-20 w-20 items-center justify-center rounded-full bg-[#C1602B] text-center text-white md:flex">
+          <p class="px-2 font-serif text-[11px] leading-tight">{{ section.settings.badge_text | newline_to_br }}</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our Story"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "About Us"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Laya's Little Shop was born from a love of handcrafted things — the kind of objects that slow you down and make you notice beauty in the everyday. What started as a small collection of notebooks and stationery has grown into a thoughtfully curated world of handcrafted stationery, daily essentials, resin art, and jewellery.</p><p>Every piece is sourced from skilled artisans across India — people who pour intention into their craft. We believe the little things matter: the notebook you reach for each morning, the earrings you wear without thinking, the pouch that makes your bag feel organised and lovely.</p><p>Small batches. Quiet beauty. Made with love, in India.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Made\\nin\\nIndia"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Our full story"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About us"
+    }
+  ]
+}
+{% endschema %}

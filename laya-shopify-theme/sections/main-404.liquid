@@ -1,0 +1,20 @@
+<section class="py-24 md:py-32" data-theme="home">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="laya-empty-state">
+      <p class="eyebrow mb-3">404</p>
+      <h1 class="font-serif text-4xl md:text-6xl">Page not found</h1>
+      <p class="mt-5 text-muted-foreground">The page you were looking for has moved, changed, or no longer exists.</p>
+      <div class="laya-cart-actions justify-center">
+        <a href="{{ routes.root_url }}" class="laya-primary-button px-8 text-[12px] font-semibold uppercase tracking-[0.14em]">Go home</a>
+        <a href="{{ routes.search_url }}" class="laya-secondary-button px-8 text-[12px] font-semibold uppercase tracking-[0.14em]">Search the shop</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

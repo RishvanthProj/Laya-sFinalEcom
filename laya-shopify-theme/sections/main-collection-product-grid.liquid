@@ -1,0 +1,148 @@
+{% liquid
+  assign theme_variant = section.settings.theme_style
+  assign price_class = 'font-bold text-accent'
+  if theme_variant == 'auto'
+    assign theme_variant = 'home'
+    if collection.handle contains 'clearance'
+      assign theme_variant = 'clearance'
+    elsif collection.handle contains 'gold-plated' or collection.handle contains 'jewellery' or collection.handle contains 'jewelry'
+      assign theme_variant = 'luxury'
+    elsif collection.handle contains 'stationery' or collection.handle contains 'school'
+      assign theme_variant = 'stationery'
+    endif
+  endif
+
+  if theme_variant == 'stationery'
+    assign price_class = 'font-bold text-[#0077CC]'
+  elsif theme_variant == 'luxury'
+    assign price_class = 'font-bold text-[#C9A84C]'
+  elsif theme_variant == 'clearance'
+    assign price_class = 'font-bold text-[#E53935]'
+  endif
+%}
+
+{% paginate collection.products by section.settings.products_per_page %}
+  <section class="relative isolate min-h-screen flex flex-col transition-colors" data-theme="{{ theme_variant }}">
+    {% if theme_variant == 'clearance' %}
+      <div class="bg-[#1A0533] overflow-hidden whitespace-nowrap py-2 border-b border-[#FFD600]">
+        <div class="inline-block animate-marquee-fast text-[#FFD600] text-[13px] font-bold">Limited Time Only · Grab It Before It's Gone · Festival Offers Live Now &nbsp; Limited Time Only · Grab It Before It's Gone · Festival Offers Live Now &nbsp;</div>
+      </div>
+    {% endif %}
+
+    <main class="category-page-main flex-1">
+      <section class="category-product-section {% if theme_variant == 'stationery' %}stationery-section-block{% endif %}">
+        {% if theme_variant == 'stationery' %}
+          <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+            <svg class="stationery-doodle stationery-doodle-pencil" width="104" height="104" viewBox="0 0 104 104" fill="none"><path d="M28 76L76 28L88 40L40 88H28V76Z" stroke="currentColor" stroke-width="6" stroke-linejoin="round" /><path d="M68 36L80 48" stroke="currentColor" stroke-width="6" stroke-linecap="round" /></svg>
+            <svg class="stationery-doodle stationery-doodle-star" width="92" height="92" viewBox="0 0 92 92" fill="none"><path d="M46 10L55 34L81 35L60 51L67 77L46 62L25 77L32 51L11 35L37 34L46 10Z" stroke="currentColor" stroke-width="6" stroke-linejoin="round" /></svg>
+            <svg class="stationery-doodle stationery-doodle-ruler" width="144" height="56" viewBox="0 0 144 56" fill="none"><rect x="8" y="14" width="128" height="28" rx="5" stroke="currentColor" stroke-width="6" /><path d="M28 14V28M48 14V36M68 14V28M88 14V36M108 14V28" stroke="currentColor" stroke-width="5" stroke-linecap="round" /></svg>
+          </div>
+        {% endif %}
+
+        <div class="container relative z-[1] mx-auto px-4 py-10 md:py-16 lg:px-8">
+          <div class="laya-toolbar">
+            <div>
+              <p class="eyebrow mb-3">{{ section.settings.eyebrow }}</p>
+              <h2 class="font-serif text-3xl md:text-4xl">{{ collection.title }}</h2>
+              <p class="laya-toolbar__meta mt-3">{{ collection.products_count }} product{% if collection.products_count != 1 %}s{% endif %}</p>
+            </div>
+            <form method="get" class="min-w-[220px]">
+              <label class="laya-field-label" for="SortBy">Sort</label>
+              <select name="sort_by" id="SortBy" class="laya-select" onchange="this.form.submit()">
+                {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+                {% for option in collection.sort_options %}
+                  <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+                {% endfor %}
+              </select>
+            </form>
+          </div>
+
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 md:gap-8">
+            {% for product in collection.products %}
+              <article class="category-product-card p-6 {% if theme_variant == 'stationery' %}bg-white rounded-[12px] border-2 border-dashed border-[#0077CC]{% elsif theme_variant == 'luxury' %}bg-[#1A1A1A] border border-[#C9A84C] rounded-sm{% elsif theme_variant == 'clearance' %}bg-white border-l-4 {% cycle 'border-[#FF4D6D]', 'border-[#00E5CC]' %}{% else %}bg-white rounded-sm border border-border{% endif %}">
+                <a href="{{ product.url }}" class="block overflow-hidden rounded-sm bg-secondary/40">
+                  {% if product.featured_media != blank %}
+                    {{ product.featured_media | image_url: width: 900 | image_tag: widths: '320, 480, 720, 900', class: 'aspect-square w-full object-cover transition-transform duration-700 hover:scale-105', loading: 'lazy', alt: product.title }}
+                  {% else %}
+                    <div class="aspect-square bg-secondary"></div>
+                  {% endif %}
+                </a>
+                <h3 class="mt-4 text-lg {% if theme_variant == 'stationery' %}font-bold text-[#1A1A2E]{% elsif theme_variant == 'luxury' %}font-serif tracking-[0.08em] text-[#F5E6C8]{% elsif theme_variant == 'clearance' %}font-bold text-[#1A0533]{% else %}text-foreground{% endif %}"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+                <div class="mb-4 mt-2 flex items-center gap-2">
+                  {% render 'price', price_product: product, price_class: price_class %}
+                </div>
+                {% form 'product', product %}
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" name="add" aria-label="Add {{ product.title }} to cart" class="w-full py-2 px-4 transition-colors duration-300 {% if theme_variant == 'stationery' %}bg-[#0077CC] text-white rounded-sm font-bold{% elsif theme_variant == 'luxury' %}bg-transparent border border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-black{% elsif theme_variant == 'clearance' %}bg-[#FFD600] text-[#1A0533] font-bold{% else %}bg-[#2C2C2A] text-white{% endif %}" {% unless product.available %}disabled{% endunless %}>
+                    {% if product.available %}Add to Cart{% else %}Sold Out{% endif %}
+                  </button>
+                {% endform %}
+              </article>
+            {% else %}
+              <div class="col-span-full laya-empty-state py-16">
+                <p class="eyebrow mb-3">Coming Soon</p>
+                <h3 class="font-serif text-3xl">No products yet</h3>
+                <p class="mt-4 text-muted-foreground">Add products to this collection in Shopify and they will appear here automatically.</p>
+              </div>
+            {% endfor %}
+          </div>
+
+          {% if paginate.pages > 1 %}
+            <nav class="laya-pagination" aria-label="Pagination">
+              {% if paginate.previous %}
+                <a href="{{ paginate.previous.url }}">Previous</a>
+              {% endif %}
+              {% for part in paginate.parts %}
+                {% if part.is_link %}
+                  <a href="{{ part.url }}">{{ part.title }}</a>
+                {% else %}
+                  <span class="{% if part.title == paginate.current_page %}is-current{% endif %}">{{ part.title }}</span>
+                {% endif %}
+              {% endfor %}
+              {% if paginate.next %}
+                <a href="{{ paginate.next.url }}">Next</a>
+              {% endif %}
+            </nav>
+          {% endif %}
+        </div>
+      </section>
+    </main>
+  </section>
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Shop The Edit"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "theme_style",
+      "label": "Collection theme style",
+      "default": "auto",
+      "options": [
+        { "value": "auto", "label": "Auto-detect" },
+        { "value": "home", "label": "Editorial" },
+        { "value": "stationery", "label": "Stationery" },
+        { "value": "luxury", "label": "Luxury" },
+        { "value": "clearance", "label": "Clearance" }
+      ]
+    }
+  ]
+}
+{% endschema %}

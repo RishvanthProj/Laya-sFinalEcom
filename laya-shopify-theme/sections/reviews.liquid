@@ -1,0 +1,94 @@
+<section class="bg-background py-12 md:py-24" data-theme="home">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="mb-8 text-center md:mb-12">
+      <p class="eyebrow mb-3">{{ section.settings.eyebrow }}</p>
+      <h2 class="font-serif text-3xl md:text-5xl">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-5">
+      {% for block in section.blocks %}
+        <div class="bg-[#FDFAF6] border border-border p-5 rounded-sm hover:shadow-sm transition-shadow md:p-7" {{ block.shopify_attributes }}>
+          <div class="mb-4 flex gap-0.5 text-[#C1602B]">
+            {% for i in (1..block.settings.stars) %}
+              {% render 'icon', name: 'star', class: 'h-3.5 w-3.5' %}
+            {% endfor %}
+          </div>
+          <p class="font-serif text-[16px] italic leading-relaxed text-foreground/85 md:text-[17px]">&ldquo;{{ block.settings.text }}&rdquo;</p>
+          <div class="mt-5 border-t border-border/60 pt-4">
+            <p class="text-[12px] font-medium uppercase tracking-[0.14em] text-foreground">{{ block.settings.name }}</p>
+            <p class="mt-0.5 text-[11px] text-muted-foreground">{{ block.settings.location }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Customer Love"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Reviews"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Aanya R."
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Mumbai"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review text",
+          "default": "The notebook is absolutely gorgeous — the linen feels expensive and the paper is dreamy to write on. Worth every rupee."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}

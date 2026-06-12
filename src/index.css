@@ -1,0 +1,475 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Laya's Little Shop — editorial design system. All colors HSL. */
+
+@layer base {
+  :root {
+    /* Brand palette */
+    --background: 33 27% 94%;          /* #F5F0EB warm off-white */
+    --foreground: 60 4% 17%;           /* #2C2C2A charcoal */
+
+    --card: 0 0% 100%;
+    --card-foreground: 60 4% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 60 4% 17%;
+
+    --primary: 60 4% 17%;              /* charcoal */
+    --primary-foreground: 33 27% 96%;
+
+    --secondary: 33 22% 88%;
+    --secondary-foreground: 60 4% 17%;
+
+    --muted: 33 18% 90%;
+    --muted-foreground: 30 6% 38%;
+
+    --accent: 19 64% 46%;              /* #C1602B terracotta */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 14% 84%;
+    --input: 30 14% 84%;
+    --ring: 60 4% 17%;
+
+    --radius: 0.25rem;
+
+    --color-bg: #F5F0EB;
+    --color-text: #2C2C2A;
+    --color-accent: #C1602B;
+    --color-card: #FFFFFF;
+
+    --sidebar-background: 33 27% 94%;
+    --sidebar-foreground: 60 4% 17%;
+    --sidebar-primary: 60 4% 17%;
+    --sidebar-primary-foreground: 33 27% 96%;
+    --sidebar-accent: 33 22% 88%;
+    --sidebar-accent-foreground: 60 4% 17%;
+    --sidebar-border: 30 14% 84%;
+    --sidebar-ring: 60 4% 17%;
+  }
+
+  .dark {
+    --background: 60 4% 10%;
+    --foreground: 33 27% 94%;
+    --card: 60 4% 12%;
+    --card-foreground: 33 27% 94%;
+    --popover: 60 4% 12%;
+    --popover-foreground: 33 27% 94%;
+    --primary: 33 27% 94%;
+    --primary-foreground: 60 4% 10%;
+    --secondary: 60 4% 18%;
+    --secondary-foreground: 33 27% 94%;
+    --muted: 60 4% 18%;
+    --muted-foreground: 30 8% 65%;
+    --accent: 19 64% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 60 4% 22%;
+    --input: 60 4% 22%;
+    --ring: 33 27% 94%;
+    --sidebar-background: 60 4% 10%;
+    --sidebar-foreground: 33 27% 94%;
+    --sidebar-primary: 33 27% 94%;
+    --sidebar-primary-foreground: 60 4% 10%;
+    --sidebar-accent: 60 4% 18%;
+    --sidebar-accent-foreground: 33 27% 94%;
+    --sidebar-border: 60 4% 22%;
+    --sidebar-ring: 33 27% 94%;
+  }
+}
+
+/* ─── THEME SYSTEM ─────────────────────────────────────────────────────────── */
+
+/* Home theme — always applied to nav, footer, cart, checkout */
+[data-theme="home"] {
+  --background: 33 27% 94%;
+  --foreground: 60 4% 17%;
+  --card: 0 0% 100%;
+  --card-foreground: 60 4% 17%;
+  --primary: 60 4% 17%;
+  --primary-foreground: 33 27% 96%;
+  --secondary: 33 22% 88%;
+  --secondary-foreground: 60 4% 17%;
+  --muted: 33 18% 90%;
+  --muted-foreground: 30 6% 38%;
+  --accent: 19 64% 46%;
+  --accent-foreground: 0 0% 100%;
+  --border: 30 14% 84%;
+  --input: 30 14% 84%;
+  --color-bg: #F5F0EB;
+  --color-text: #2C2C2A;
+  --color-accent: #C1602B;
+  --color-card: #FFFFFF;
+}
+
+/* Stationery theme — bright sky blue stationery palette */
+[data-theme="stationery"] {
+  --background: 206 100% 96%;  /* #EAF6FF */
+  --foreground: 240 28% 14%;   /* #1A1A2E */
+  --card: 0 0% 100%;           /* #FFFFFF */
+  --card-foreground: 240 28% 14%;
+  --primary: 240 28% 14%;
+  --primary-foreground: 206 100% 96%;
+  --secondary: 125 39% 94%;    /* #E8F5E9 soft mint */
+  --secondary-foreground: 240 28% 14%;
+  --muted: 37 100% 94%;        /* #FFF3E0 warm peach */
+  --muted-foreground: 240 20% 38%;
+  --accent: 205 100% 40%;      /* #0077CC */
+  --accent-foreground: 0 0% 100%;
+  --border: 205 100% 40%;
+  --input: 205 100% 40%;
+  --color-bg: #EAF6FF;
+  --color-text: #1A1A2E;
+  --color-accent: #0077CC;
+  --color-card: #FFFFFF;
+}
+
+/* Luxury theme — high-end jewellery boutique, dark, gold-accented */
+[data-theme="luxury"] {
+  --background: 0 0% 5%;       /* #0D0D0D */
+  --foreground: 40 69% 87%;    /* #F5E6C8 champagne */
+  --card: 0 0% 10%;            /* #1A1A1A */
+  --card-foreground: 40 69% 87%;
+  --primary: 40 69% 87%;
+  --primary-foreground: 0 0% 5%;
+  --secondary: 0 0% 7%;        /* #111111 */
+  --secondary-foreground: 40 69% 87%;
+  --muted: 0 0% 7%;
+  --muted-foreground: 39 50% 67%;
+  --accent: 44 54% 54%;        /* #C9A84C antique gold */
+  --accent-foreground: 0 0% 5%;
+  --border: 44 54% 54%;
+  --input: 0 0% 14%;
+  --color-bg: #0D0D0D;
+  --color-text: #F5E6C8;
+  --color-accent: #C9A84C;
+  --color-card: #1A1A1A;
+}
+
+/* Clearance theme — festival + flash sale energy */
+[data-theme="clearance"] {
+  --background: 270 91% 11%;   /* #1A0533 deep festive purple */
+  --foreground: 0 0% 100%;     /* white */
+  --card: 0 0% 100%;
+  --card-foreground: 270 91% 11%;
+  --primary: 0 0% 100%;
+  --primary-foreground: 270 91% 11%;
+  --secondary: 270 80% 18%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 270 70% 18%;
+  --muted-foreground: 0 0% 80%;
+  --accent: 51 100% 50%;       /* #FFD600 yellow */
+  --accent-foreground: 270 91% 11%;
+  --border: 270 60% 32%;
+  --input: 270 60% 22%;
+  --color-bg: #1A0533;
+  --color-text: #FFFFFF;
+  --color-accent: #FFD600;
+  --color-card: #FFFFFF;
+}
+
+/* ─── GLOBAL TRANSITIONS ───────────────────────────────────────────────────── */
+body,
+.category-product-card,
+[data-card] {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ─── BASE ─────────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+  }
+  .font-serif {
+    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  }
+  .eyebrow {
+    @apply text-[11px] uppercase tracking-[0.18em] text-accent font-medium;
+  }
+  .nav-link {
+    @apply relative text-[12px] uppercase tracking-[0.14em] font-normal text-foreground/80 hover:text-foreground transition-colors inline-block w-max;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #C1602B;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ─── MARQUEE ───────────────────────────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+.animate-marquee-fast {
+  animation: marquee 18s linear infinite;
+}
+
+/* ─── GRADIENT TEXT ─────────────────────────────────────────────────────────── */
+@keyframes gradientCycle {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.text-rgb-gradient {
+  background: linear-gradient(
+    to right,
+    #ff2a2a,
+    #ff5588,
+    #2aebff,
+    #2a2aff,
+    #e82aff,
+    #ff2a2a
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradientCycle 3s linear infinite;
+}
+
+/* ─── MEGA MENU ─────────────────────────────────────────────────────────────── */
+.mega-enter {
+  animation: megaIn 200ms ease-out both;
+}
+@keyframes megaIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── CATEGORY THEME HELPERS ───────────────────────────────────────────────── */
+.category-page-content {
+  color: hsl(var(--foreground));
+}
+
+.category-product-section {
+  position: relative;
+  min-height: 60vh;
+}
+
+.stationery-page-header {
+  background: #FFFFFF;
+  border-bottom: 4px solid #0077CC;
+}
+
+.category-page[data-page-theme="stationery"] .category-page-content {
+  font-weight: 500;
+}
+
+.category-page[data-page-theme="stationery"] .category-product-section:nth-of-type(3n + 1) {
+  background: #EAF6FF;
+}
+
+.category-page[data-page-theme="stationery"] .category-product-section:nth-of-type(3n + 2) {
+  background: #E8F5E9;
+}
+
+.category-page[data-page-theme="stationery"] .category-product-section:nth-of-type(3n) {
+  background: #FFF3E0;
+}
+
+.stationery-section-block {
+  overflow: hidden;
+}
+
+.stationery-doodle {
+  position: absolute;
+  color: #0077CC;
+  opacity: 0.08;
+}
+
+.stationery-doodle-pencil {
+  right: 7%;
+  top: 10%;
+  transform: rotate(-10deg);
+}
+
+.stationery-doodle-star {
+  left: 6%;
+  bottom: 14%;
+  transform: rotate(12deg);
+}
+
+.stationery-doodle-ruler {
+  right: 18%;
+  bottom: 7%;
+  transform: rotate(-7deg);
+}
+
+.luxury-page-header {
+  background: #111111;
+  border-bottom: 1px solid #C9A84C;
+}
+
+.category-page[data-page-theme="luxury"] .category-page-content h1,
+.category-page[data-page-theme="luxury"] .category-page-content h2,
+.category-page[data-page-theme="luxury"] .category-page-content h3 {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  letter-spacing: 0.15em;
+}
+
+.category-divider {
+  border-top: 1px solid #C9A84C;
+  width: 100%;
+}
+
+/* ─── CLEARANCE THEME HELPERS ───────────────────────────────────────────────── */
+.section-heading-clearance {
+  position: relative;
+  display: inline-block;
+}
+.section-heading-clearance::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #FFD600;
+}
+
+/* Clearance night-sky background: CSS-only twinkles and shooting stars. */
+.clearance-sky {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.twinkle-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--star-color, #FFFFFF);
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: twinkle;
+  animation-duration: var(--duration, 2s);
+  animation-delay: var(--delay, 0s);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.75); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 60px;
+  height: 1.5px;
+  background: linear-gradient(to right, #FFFFFF, transparent);
+  opacity: 0;
+  transform: rotate(28deg);
+  animation-name: shootingstar;
+  animation-duration: 4s;
+  animation-delay: var(--delay, 0s);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes shootingstar {
+  0%, 68% { opacity: 0; transform: translateX(0) translateY(0) rotate(28deg); }
+  72% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(200px) translateY(100px) rotate(28deg); }
+}
+
+/* ─── HORIZONTAL SCROLL ROW ─────────────────────────────────────────────────── */
+.scroll-row {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 1rem 0.5rem 0;
+  scrollbar-width: none;
+}
+.scroll-row::-webkit-scrollbar {
+  display: none;
+}
+.scroll-row > * {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* ─── CHECKOUT FLOATING LABELS ───────────────────────────────────────────────── */
+.floating-label-group {
+  position: relative;
+}
+.floating-label-group input,
+.floating-label-group select {
+  padding-top: 1.375rem;
+  padding-bottom: 0.375rem;
+  height: 48px;
+  width: 100%;
+  border: 1px solid #D1C9BE;
+  border-radius: 4px;
+  padding-left: 14px;
+  padding-right: 14px;
+  background: #fff;
+  font-size: 14px;
+  color: #2C2C2A;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.floating-label-group input:focus,
+.floating-label-group select:focus {
+  border-color: #C1602B;
+  box-shadow: 0 0 0 2px rgba(193,96,43,0.15);
+}
+.floating-label-group label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #888;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+.floating-label-group input:focus ~ label,
+.floating-label-group input:not(:placeholder-shown) ~ label,
+.floating-label-group select:focus ~ label,
+.floating-label-group select:not([value=""]) ~ label {
+  top: 10px;
+  transform: none;
+  font-size: 10px;
+  color: #C1602B;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

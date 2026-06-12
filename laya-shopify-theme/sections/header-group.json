@@ -1,0 +1,35 @@
+{
+  "name": "Header group",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Handcrafted artisan finds made with love in India",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-1"
+      ]
+    },
+    "header": {
+      "type": "header",
+        "settings": {
+          "menu": "main-menu",
+          "show_search": true,
+          "use_default_categories": true,
+          "show_account": true,
+          "show_cart": true
+        }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

@@ -1,0 +1,105 @@
+<section class="bg-secondary/30 py-12 md:py-24" data-theme="home">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="mb-8 text-center md:mb-12">
+      <p class="eyebrow mb-3">{{ section.settings.eyebrow }}</p>
+      <h2 class="font-serif text-3xl md:text-5xl">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 md:gap-5 lg:grid-cols-5">
+      {% for block in section.blocks %}
+        {% render 'collection-card', card_collection: collections[block.settings.collection], manual_title: block.settings.title, manual_url: block.settings.link, manual_badge: block.settings.badge, manual_image: block.settings.image, fallback_asset: block.settings.fallback_asset, manual_background: block.settings.background_color, manual_gradient: block.settings.background_gradient, block: block %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection categories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Browse"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shop All Categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_card",
+      "name": "Category card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Manual title",
+          "default": "Stationery"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Manual link"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Manual image"
+        },
+        {
+          "type": "select",
+          "id": "fallback_asset",
+          "label": "Fallback theme image",
+          "default": "cat-stationery.jpg",
+          "options": [
+            { "value": "cat-stationery.jpg", "label": "Stationery" },
+            { "value": "cat-daily.jpg", "label": "Daily essentials" },
+            { "value": "cat-jewellery.jpg", "label": "Jewellery" },
+            { "value": "cat-sale.jpg", "label": "Sale" },
+            { "value": "", "label": "Use color / gradient only" }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Fallback background color",
+          "default": "#E8C8B8"
+        },
+        {
+          "type": "text",
+          "id": "background_gradient",
+          "label": "Fallback gradient CSS"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Collection categories",
+      "blocks": [
+        { "type": "category_card" },
+        { "type": "category_card" },
+        { "type": "category_card" },
+        { "type": "category_card" },
+        { "type": "category_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

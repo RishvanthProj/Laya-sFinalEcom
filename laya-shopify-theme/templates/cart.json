@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "show_note": true,
+        "recommendation_collection": "",
+        "recommendation_title": "You might also like"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "title": "Shop All Collections",
+        "collections_per_page": 12
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

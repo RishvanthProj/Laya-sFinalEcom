@@ -1,0 +1,151 @@
+{% liquid
+  assign featured_collection = collections[section.settings.collection]
+  assign view_all_url = section.settings.view_all_link
+  if featured_collection != blank and view_all_url == blank
+    assign view_all_url = featured_collection.url
+  endif
+%}
+
+<section class="bg-background py-12 md:py-24" data-theme="home">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="mb-8 flex items-end justify-between md:mb-10">
+      <div>
+        <p class="eyebrow mb-2">{{ section.settings.eyebrow }}</p>
+        <h2 class="font-serif text-3xl md:text-5xl">{{ section.settings.title }}</h2>
+      </div>
+      {% if view_all_url != blank %}
+        <a href="{{ view_all_url }}" class="hidden border-b border-foreground/40 pb-0.5 text-[11px] uppercase tracking-[0.18em] transition-colors hover:border-accent hover:text-accent sm:block">{{ section.settings.view_all_label }}</a>
+      {% endif %}
+    </div>
+
+    <div class="scroll-row lg:grid lg:grid-cols-4 lg:gap-6">
+      {% if featured_collection != blank and featured_collection.products_count > 0 %}
+        {% for product in featured_collection.products limit: section.settings.products_to_show %}
+          {% render 'product-card', card_product: product, badge_text: section.settings.badge_label %}
+        {% endfor %}
+      {% else %}
+        {% for block in section.blocks %}
+          {% render 'product-card', card_product: all_products[block.settings.product], badge_text: block.settings.badge_label | default: section.settings.badge_label, fallback_title: block.settings.fallback_title, fallback_price: block.settings.fallback_price, fallback_asset: block.settings.fallback_asset, fallback_image: block.settings.fallback_image, fallback_url: block.settings.fallback_url, block: block %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Top selling products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Most Loved"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Top Selling"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 4,
+      "max": 8,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "text",
+      "id": "badge_label",
+      "label": "Default badge label",
+      "default": "Best Seller"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "badge_label",
+          "label": "Badge label",
+          "default": "Best Seller"
+        },
+        {
+          "type": "text",
+          "id": "fallback_title",
+          "label": "Fallback title",
+          "default": "Linen Bound Journal"
+        },
+        {
+          "type": "text",
+          "id": "fallback_price",
+          "label": "Fallback price",
+          "default": "Rs. 649"
+        },
+        {
+          "type": "url",
+          "id": "fallback_url",
+          "label": "Fallback link"
+        },
+        {
+          "type": "image_picker",
+          "id": "fallback_image",
+          "label": "Fallback image"
+        },
+        {
+          "type": "select",
+          "id": "fallback_asset",
+          "label": "Fallback theme image",
+          "default": "p-notebook.jpg",
+          "options": [
+            { "value": "p-notebook.jpg", "label": "Journal" },
+            { "value": "p-earrings.jpg", "label": "Earrings" },
+            { "value": "p-pouch.jpg", "label": "Pouch" },
+            { "value": "p-highlighters.jpg", "label": "Highlighters" }
+          ]
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Top selling products",
+      "blocks": [
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

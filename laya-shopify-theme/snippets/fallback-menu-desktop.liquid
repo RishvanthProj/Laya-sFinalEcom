@@ -1,0 +1,164 @@
+<div class="relative laya-nav-item">
+  <a href="{{ routes.search_url }}?q=stationery&type=product" class="nav-link flex items-center gap-1">
+    <span>Stationery</span>
+    {% render 'icon', name: 'chevron-down', class: 'h-3 w-3 opacity-60' %}
+  </a>
+  <div class="laya-mega-panel absolute left-1/2 top-full -translate-x-1/2 pt-3 z-50">
+    <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[260px] py-3">
+      <ul class="flex flex-col" aria-label="Stationery submenu">
+        <li class="relative laya-subnav-item">
+          <a href="{{ routes.search_url }}?q=writing%20supplies&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">
+            <span>Writing Supplies</span>
+            {% render 'icon', name: 'chevron-right', class: 'h-3 w-3 opacity-60' %}
+          </a>
+          <div class="laya-subnav-panel absolute left-full top-0 pl-1">
+            <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[220px] py-3">
+              <ul aria-label="Writing Supplies options">
+                <li><a href="{{ routes.search_url }}?q=pens&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Pens</a></li>
+                <li><a href="{{ routes.search_url }}?q=pencils&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Pencils</a></li>
+                <li><a href="{{ routes.search_url }}?q=highlighters&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Highlighters</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li><a href="{{ routes.search_url }}?q=erasers%20sharpeners&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Erasers &amp; Sharpeners</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=notebooks%20journals&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Notebooks &amp; Journals</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=stickers%20labels&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Stickers &amp; Labels</span></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="relative laya-nav-item">
+  <a href="{{ routes.search_url }}?q=daily%20essentials&type=product" class="nav-link flex items-center gap-1">
+    <span>Daily Essentials</span>
+    {% render 'icon', name: 'chevron-down', class: 'h-3 w-3 opacity-60' %}
+  </a>
+  <div class="laya-mega-panel absolute left-1/2 top-full -translate-x-1/2 pt-3 z-50">
+    <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[260px] py-3">
+      <ul class="flex flex-col" aria-label="Daily Essentials submenu">
+        <li><a href="{{ routes.search_url }}?q=lunch%20boxes%20bottles&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Lunch Boxes &amp; Bottles</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=bags&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Bags</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=pencil%20pouches&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Pencil Pouches</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=bag%20charms&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Bag Charms</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=bag%20brooches%20pins&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Bag Brooches &amp; Pins</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=thermal%20bags&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Thermal Bags</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=organizers&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Organizers</span></a></li>
+        <li class="relative laya-subnav-item">
+          <a href="{{ routes.search_url }}?q=seasonal%20decor&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">
+            <span>Seasonal Decor</span>
+            {% render 'icon', name: 'chevron-right', class: 'h-3 w-3 opacity-60' %}
+          </a>
+          <div class="laya-subnav-panel absolute left-full top-0 pl-1">
+            <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[220px] py-3">
+              <ul aria-label="Seasonal Decor options">
+                <li><a href="{{ routes.search_url }}?q=christmas%20ornaments&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Christmas Ornaments</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="relative laya-nav-item">
+  <a href="{{ routes.search_url }}?q=resin%20art&type=product" class="nav-link flex items-center gap-1">
+    <span>Resin Art</span>
+    {% render 'icon', name: 'chevron-down', class: 'h-3 w-3 opacity-60' %}
+  </a>
+  <div class="laya-mega-panel absolute left-1/2 top-full -translate-x-1/2 pt-3 z-50">
+    <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[260px] py-3">
+      <ul class="flex flex-col" aria-label="Resin Art submenu">
+        <li><a href="{{ routes.search_url }}?q=keychains&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Keychains</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=fridge%20magnets&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Fridge Magnets</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=photo%20frames&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Photo Frames</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=coasters&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Coasters</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=spoon%20stand&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Spoon Stand</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=phone%20stands&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Phone Stands</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=return%20gifts&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Return Gifts</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=cake%20trays&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Cake Trays</span></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="relative laya-nav-item">
+  <a href="{{ routes.search_url }}?q=accessories%20jewellery&type=product" class="nav-link flex items-center gap-1">
+    <span>Accessories &amp; Jewellery</span>
+    {% render 'icon', name: 'chevron-down', class: 'h-3 w-3 opacity-60' %}
+  </a>
+  <div class="laya-mega-panel absolute left-1/2 top-full -translate-x-1/2 pt-3 z-50">
+    <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[260px] py-3">
+      <ul class="flex flex-col" aria-label="Accessories submenu">
+        <li class="relative laya-subnav-item">
+          <a href="{{ routes.search_url }}?q=hair%20accessories&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">
+            <span>Hair Accessories</span>
+            {% render 'icon', name: 'chevron-right', class: 'h-3 w-3 opacity-60' %}
+          </a>
+          <div class="laya-subnav-panel absolute left-full top-0 pl-1">
+            <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[220px] py-3">
+              <ul aria-label="Hair Accessories options">
+                <li><a href="{{ routes.search_url }}?q=kids%20hair%20accessories&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Kids</a></li>
+                <li><a href="{{ routes.search_url }}?q=women%20hair%20accessories&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Women&apos;s</a></li>
+                <li><a href="{{ routes.search_url }}?q=festive%20party%20hair%20accessories&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Festive &amp; Party Wear</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="relative laya-subnav-item">
+          <a href="{{ routes.search_url }}?q=everyday%20jewellery&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">
+            <span>Everyday Jewellery</span>
+            {% render 'icon', name: 'chevron-right', class: 'h-3 w-3 opacity-60' %}
+          </a>
+          <div class="laya-subnav-panel absolute left-full top-0 pl-1">
+            <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[220px] py-3">
+              <ul aria-label="Everyday Jewellery options">
+                <li><a href="{{ routes.search_url }}?q=studs%20earrings&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Studs &amp; Earrings</a></li>
+                <li><a href="{{ routes.search_url }}?q=anklets&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Anklets</a></li>
+                <li><a href="{{ routes.search_url }}?q=bracelets%20bangles&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Bracelets &amp; Bangles</a></li>
+                <li><a href="{{ routes.search_url }}?q=necklaces&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Necklaces</a></li>
+                <li><a href="{{ routes.search_url }}?q=rings&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Rings</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="relative laya-subnav-item">
+          <a href="{{ routes.search_url }}?q=gold-plated%20jewellery&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">
+            <span>Gold-Plated Jewellery</span>
+            {% render 'icon', name: 'chevron-right', class: 'h-3 w-3 opacity-60' %}
+          </a>
+          <div class="laya-subnav-panel absolute left-full top-0 pl-1">
+            <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[220px] py-3">
+              <ul aria-label="Gold-Plated Jewellery options">
+                <li><a href="{{ routes.search_url }}?q=gold-plated%20necklaces&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Necklaces</a></li>
+                <li><a href="{{ routes.search_url }}?q=gold-plated%20bracelets%20bangles&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Bracelets &amp; Bangles</a></li>
+                <li><a href="{{ routes.search_url }}?q=gold-plated%20rings&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Rings</a></li>
+                <li><a href="{{ routes.search_url }}?q=gold-plated%20earrings&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Earrings &amp; Studs</a></li>
+                <li><a href="{{ routes.search_url }}?q=watches&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Watches</a></li>
+                <li><a href="{{ routes.search_url }}?q=brooches&type=product" class="block px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors">Brooches</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="relative laya-nav-item">
+  <a href="{{ routes.search_url }}?q=clearance&type=product" class="nav-link flex items-center gap-1 text-accent">
+    <span>Clearance Sale</span>
+    {% render 'icon', name: 'chevron-down', class: 'h-3 w-3 opacity-60' %}
+  </a>
+  <div class="laya-mega-panel absolute left-1/2 top-full -translate-x-1/2 pt-3 z-50">
+    <div class="mega-enter bg-white border border-border shadow-[0_20px_40px_-20px_rgba(0,0,0,0.15)] rounded-sm min-w-[260px] py-3">
+      <ul class="flex flex-col" aria-label="Clearance submenu">
+        <li><a href="{{ routes.search_url }}?q=pens%20pencils%20clearance&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Pens &amp; Pencils</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=erasers%20sharpeners%20clearance&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Erasers &amp; Sharpeners</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=highlighters%20clearance&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Highlighters</span></a></li>
+        <li><a href="{{ routes.search_url }}?q=stationery%20clearance&type=product" class="flex items-center justify-between gap-6 px-5 py-2 text-[12px] uppercase tracking-[0.12em] text-foreground/80 hover:text-accent hover:bg-secondary/40 transition-colors"><span>Stationery Clearance</span></a></li>
+      </ul>
+    </div>
+  </div>
+</div>

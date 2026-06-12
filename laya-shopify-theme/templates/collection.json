@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "eyebrow": "Shop The Edit",
+        "theme_style": "auto"
+      }
+    },
+    "product_grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "eyebrow": "Curated collection",
+        "products_per_page": 12,
+        "theme_style": "auto"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product_grid"
+  ]
+}

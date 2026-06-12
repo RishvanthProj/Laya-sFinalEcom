@@ -1,0 +1,15 @@
+{
+  "current": "Laya Boutique",
+  "presets": {
+    "Laya Boutique": {
+      "logo_width": 180,
+      "store_tagline": "Handcrafted artisan stationery, daily essentials & jewellery — made with love, in India.",
+      "footer_email": "hello@layaslittleshop.in",
+      "footer_hours": "Mon – Sat, 10am – 6pm IST",
+      "footer_made_in": "Made with love in India",
+      "social_instagram_link": "https://instagram.com/layaslittleshop",
+      "social_facebook_link": "",
+      "social_pinterest_link": ""
+    }
+  }
+}
