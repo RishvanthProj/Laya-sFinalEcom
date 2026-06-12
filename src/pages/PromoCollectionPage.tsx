@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Heart, Star, ShoppingCart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import clearanceSale from "@/assets/hero-clearance-sale.png";
@@ -102,35 +103,47 @@ const PromoCollectionPage = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-5">
-            {page.products.map((product, index) => (
-              <article
-                key={product}
-                className={`category-product-card border p-5 ${
-                  page.theme === "luxury" ? "border-[#C9A84C] bg-[#1A1A1A]" : "border-border bg-card"
-                }`}
-              >
-                <Link to={`/product/${product.toLowerCase().replace(/\s+/g, '-')}`}>
-                  <div
-                    className={`mb-4 aspect-square rounded-sm ${
-                      page.theme === "clearance"
-                        ? "bg-[#FFD600]"
-                        : page.theme === "stationery"
-                          ? index % 2 === 0 ? "bg-[#EAF6FF]" : "bg-[#FFF3E0]"
-                          : page.theme === "luxury"
-                            ? "bg-[#111111]"
-                            : "bg-secondary/50"
-                    }`}
-                    aria-hidden="true"
-                  />
-                </Link>
-                <Link to={`/product/${product.toLowerCase().replace(/\s+/g, '-')}`}>
-                  <h3 className="text-base font-semibold hover:underline">{product}</h3>
-                </Link>
-                <p className={`mt-2 text-sm ${page.theme === "luxury" ? "text-[#C9A84C]" : "text-accent"}`}>
-                  From ₹199
-                </p>
-              </article>
-            ))}
+            {page.products.map((product, index) => {
+              const colorClass = page.theme === "clearance" ? "bg-[#FFD600]" : page.theme === "stationery" ? (index % 2 === 0 ? "bg-[#EAF6FF]" : "bg-[#FFF3E0]") : page.theme === "luxury" ? "bg-[#111111]" : "bg-secondary/50";
+              
+              return (
+                <article key={product} className="group relative">
+                  <div className="relative overflow-hidden aspect-[4/5] bg-secondary/40 mb-4 rounded-sm">
+                    <Link to={`/product/${product.toLowerCase().replace(/\s+/g, '-')}`} state={{ color: colorClass }}>
+                      <div className={`w-full h-full ${colorClass}`} aria-hidden="true" />
+                    </Link>
+
+                    <span className="absolute top-3 left-3 bg-[#C18F76] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm">
+                      {index % 2 === 0 ? "Bestseller" : "New"}
+                    </span>
+
+                    <button className="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 p-1.5 rounded-full shadow-sm transition-colors">
+                      <Heart size={14} />
+                    </button>
+
+                    <button className="absolute inset-x-3 bottom-3 bg-background/95 text-foreground text-[11px] font-bold uppercase tracking-[0.14em] py-3 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all rounded-sm flex items-center justify-center gap-2">
+                      <ShoppingCart size={14} /> Add to Cart
+                    </button>
+                  </div>
+                  
+                  <div>
+                    <Link to={`/product/${product.toLowerCase().replace(/\s+/g, '-')}`} state={{ color: colorClass }}>
+                      <h3 className="text-[14px] text-foreground hover:underline">{product}</h3>
+                    </Link>
+                    <p className="text-[12px] text-muted-foreground mt-1 line-clamp-1">Beautifully crafted and designed.</p>
+                    
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="font-bold text-[14px] text-foreground">From ₹199</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-1 mt-1">
+                      <Star size={10} fill="#C18F76" className="text-[#C18F76]" />
+                      <span className="text-[10px] text-gray-500">4.5 (89)</span>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
       </main>

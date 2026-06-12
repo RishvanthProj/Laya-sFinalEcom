@@ -1,5 +1,6 @@
 import { useEffect, type CSSProperties } from "react";
 import { useLocation, useParams, Link } from "react-router-dom";
+import { Heart, Star, ShoppingCart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { NAV, slugifyNavLabel, type NavCategory, type SubItem } from "@/data/nav";
@@ -227,57 +228,45 @@ const CategoryPage = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8">
                 {products.map((p, i) => (
-                  <article
-                    key={`${p.name}-${i}`}
-                    className={`
-                      category-product-card p-6
-                      ${theme === "stationery" ? "bg-white rounded-[12px] border-2 border-dashed border-[#0077CC]" : ""}
-                      ${theme === "luxury" ? "bg-[#1A1A1A] border border-[#C9A84C] rounded-sm" : ""}
-                      ${theme === "clearance" ? `bg-white border-l-4 ${i % 2 === 0 ? "border-[#FF4D6D]" : "border-[#00E5CC]"}` : ""}
-                      ${theme === "home" ? "bg-white rounded-sm border border-border" : ""}
-                    `}
-                  >
-                    <Link to={`/product/${p.name.toLowerCase().replace(/\s+/g, '-')}`} state={{ price: p.price, color: p.color }}>
-                      <div className={`aspect-square mb-4 ${p.color} flex items-center justify-center rounded-sm`} aria-hidden="true" />
-                    </Link>
-                    <Link to={`/product/${p.name.toLowerCase().replace(/\s+/g, '-')}`} state={{ price: p.price, color: p.color }}>
-                      <h3 className={`
-                        text-lg mb-2 hover:underline
-                        ${theme === "stationery" ? "font-bold text-[#1A1A2E]" : ""}
-                        ${theme === "luxury" ? "font-serif tracking-[0.08em] text-[#F5E6C8]" : ""}
-                        ${theme === "clearance" ? "font-bold text-[#1A0533]" : ""}
-                        ${theme === "home" ? "text-foreground" : ""}
-                      `}>
-                        {p.name}
-                      </h3>
-                    </Link>
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className={`
-                        font-bold
-                        ${theme === "stationery" ? "text-[#0077CC]" : ""}
-                        ${theme === "luxury" ? "text-[#C9A84C]" : ""}
-                        ${theme === "clearance" ? "text-[#E53935]" : ""}
-                        ${theme === "home" ? "text-accent" : ""}
-                      `}>
-                        {p.price}
+                  <article key={`${p.name}-${i}`} className="group relative">
+                    <div className="relative overflow-hidden aspect-[4/5] bg-secondary/40 mb-4 rounded-sm">
+                      <Link to={`/product/${p.name.toLowerCase().replace(/\s+/g, '-')}`} state={{ price: p.price, color: p.color }}>
+                        <div className={`w-full h-full ${p.color}`} aria-hidden="true" />
+                      </Link>
+                      
+                      <span className="absolute top-3 left-3 bg-[#C18F76] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm">
+                        {i % 2 === 0 ? "Bestseller" : "New"}
                       </span>
-                      {p.oldPrice && (
-                        <span className="text-gray-400 line-through text-sm">{p.oldPrice}</span>
-                      )}
+
+                      <button className="absolute top-3 right-3 bg-white/80 hover:bg-white text-gray-700 p-1.5 rounded-full shadow-sm transition-colors">
+                        <Heart size={14} />
+                      </button>
+
+                      <button className="absolute inset-x-3 bottom-3 bg-background/95 text-foreground text-[11px] font-bold uppercase tracking-[0.14em] py-3 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all rounded-sm flex items-center justify-center gap-2">
+                        <ShoppingCart size={14} /> Add to Cart
+                      </button>
                     </div>
-                    <button
-                      type="button"
-                      aria-label={`Add ${p.name} to cart`}
-                      className={`
-                        w-full py-2 px-4 transition-colors duration-300
-                        ${theme === "stationery" ? "bg-[#0077CC] text-white rounded-sm font-bold" : ""}
-                        ${theme === "luxury" ? "bg-transparent border border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-black" : ""}
-                        ${theme === "clearance" ? "bg-[#FFD600] text-[#1A0533] font-bold" : ""}
-                        ${theme === "home" ? "bg-[#2C2C2A] text-white" : ""}
-                      `}
-                    >
-                      Add to Cart
-                    </button>
+                    
+                    <div>
+                      <Link to={`/product/${p.name.toLowerCase().replace(/\s+/g, '-')}`} state={{ price: p.price, color: p.color }}>
+                        <h3 className="text-[14px] text-foreground hover:underline">{p.name}</h3>
+                      </Link>
+                      <p className="text-[12px] text-muted-foreground mt-1 line-clamp-1">
+                        {theme === "stationery" ? "Perfect for your daily notes and sketches." : 
+                         theme === "luxury" ? "Elegant design for special occasions." :
+                         "A wonderful addition to your collection."}
+                      </p>
+                      
+                      <div className="flex items-center gap-2 mt-2">
+                        <span className="font-bold text-[14px] text-foreground">{p.price}</span>
+                        {p.oldPrice && <span className="text-gray-400 line-through text-[12px]">{p.oldPrice}</span>}
+                      </div>
+                      
+                      <div className="flex items-center gap-1 mt-1">
+                        <Star size={10} fill="#C18F76" className="text-[#C18F76]" />
+                        <span className="text-[10px] text-gray-500">4.8 (124)</span>
+                      </div>
+                    </div>
                   </article>
                 ))}
               </div>
